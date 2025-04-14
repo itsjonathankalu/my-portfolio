@@ -144,7 +144,7 @@ const projects = [
     description:
       'A comprehensive full-stack blogging platform inspired by Medium. Features include rich text editing, user authentication, article publishing with categories and tags, commenting system, and responsive design. Built with performance and scalability in mind using modern web technologies.',
     technologies: ['Express.js', 'Node.js', 'MongoDB', 'TailwindCSS', 'EJS'],
-    github: 'https://github.com/jkdevio/Medium-Clone',
+    github: 'https://github.com/itsn8k/Medium-Clone',
     demo: 'https://mediumclone.up.railway.app',
     image: '/images/img1.png',
   },
@@ -153,23 +153,64 @@ const projects = [
     description:
       'A modern, minimalist portfolio website showcasing my work and experience. Features smooth animations, responsive design, and optimized performance. Built with Vue.js and TailwindCSS, incorporating modern design principles and best practices for an engaging user experience.',
     technologies: ['Vue.js', 'TailwindCss', 'Vite', 'Node.js'],
-    github: 'https://github.com/jkdevio/my-portfolio',
+    github: 'https://github.com/itsn8k/my-portfolio',
     demo: 'https://jkdevio-portfolio.vercel.app',
     image: '/images/img2.png',
   },
-  // {
-  //   name: 'MovieDB',
-  //   description: 'Movie database application with real-time updates and recommendations.',
-  //   technologies: ['Vue.js', 'Firebase', 'TailwindCSS'],
-  //   github: 'https://github.com/yourusername/movie-db',
-  //   demo: 'https://movie-db.demo.com',
-  // },
-  // {
-  //   name: 'GitProfile',
-  //   description: 'GitHub profile analyzer and statistics visualization tool.',
-  //   technologies: ['TypeScript', 'GitHub API', 'Chart.js'],
-  //   github: 'https://github.com/yourusername/git-profile',
-  //   demo: 'https://git-profile.demo.com',
-  // },
+
+  {
+    name: 'Cartzilla',
+    description:
+      'An elegant and responsive e-commerce platform built using the Cartzilla template and powered by Bootstrap 5, Designed for fashion stores.',
+    technologies: ['Bootstrap', 'Bootstrap.js', 'Istope.js', 'Jquery', 'Css'],
+    github: 'https://github.com/itsn8k/Cartzilla-Bootstrap-5-Website',
+    demo: 'https://cartzilla-five.vercel.app',
+    image: '/images/img3.png',
+  },
+  {
+    name: 'FitGuide Pro',
+    description:
+      'A modern Bootstrap 5 website designed for gym and fitness enthusiasts. FitGuide Pro offers a sleek and responsive layout, highlighting fitness programs, services, and expert guidance.',
+    technologies: ['HTML 5', 'Css 3', 'Bootstrap 5', 'Javascript', 'Jquery'],
+    github: 'https://github.com/itsn8k/FreeGuide-Bootstrap-5-Site',
+    demo: 'https://freeguidepro.vercel.app',
+    image: '/images/img4.png',
+  },
+  {
+    name: 'Sneaker',
+    description:
+      'A sleek and responsive Bootstrap 5 website designed for sneaker enthusiasts. Sneaker Nine combines modern design with an intuitive layout, perfect for showcasing sneaker collections and fashion trends.',
+    technologies: ['HTML 5', 'Css 3', 'Bootstrap 5', 'Javascript', 'Jquery', 'Lighslider.js'],
+    github: 'https://github.com/itsn8k/Sneaker-Bootstrap-5-Site',
+    demo: 'https://sneaker-nine-lyart.vercel.app',
+    image: '/images/img5.png',
+  },
+  {
+    name: 'Trulia',
+    description:
+      'A sleek and responsive Bootstrap 5 website designed for Realestate. Trulia combines modern design with an intuitive layout, perfect for showcasing Realestate collections and trends.',
+    technologies: ['HTML 5', 'Css 3', 'Bootstrap 5', 'Javascript', 'Jquery', 'Lighslider.js'],
+    github: 'https://github.com/itsn8k/Trulia-Site',
+    demo: 'https://trulia-site-pi.vercel.app',
+    image: '/images/img6.png',
+  },
+  {
+    name: 'VTEKS',
+    description:
+      'A modern, responsive website template for web agencies and freelancers to showcase services, portfolios, and contact information.',
+    technologies: ['HTML 5', 'Css 3', 'Bootstrap 5', 'Javascript', 'Jquery', 'Lighslider.js'],
+    github: 'https://github.com/itsn8k/Official-Vteks_Bootstrap-5-Site',
+    demo: 'https://official-vteks.vercel.app',
+    image: '/images/img7.png',
+  },
+  {
+    name: 'Flux',
+    description:
+      'A sleek and responsive Bootstrap 5 website designed for Realestate. Trulia combines modern design with an intuitive layout, perfect for showcasing Realestate collections and trends.',
+    technologies: ['HTML 5', 'Css 3', 'Bootstrap 5', 'Javascript', 'Jquery', 'Lighslider.js'],
+    github: 'https://github.com/itsn8k/Flux-Website-Template',
+    demo: 'https://flux-ashen.vercel.app',
+    image: '/images/img8.png',
+  },
 ]
 </script>
