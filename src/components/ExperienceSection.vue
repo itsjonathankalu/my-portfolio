@@ -113,15 +113,15 @@
 
 <script setup>
 const experiences = [
-  // {
-  //   company: 'ITOH MEDCARE UK',
-  //   role: 'Full Stack Developer',
-  //   duration: '2024 - Present',
-  //   description: [
-  //     'Led the development of a high-performance web application for a healthcare company for keeping track of their patients and their medical records.',
-  //   ],
-  //   technologies: ['Vue.js', 'Node.JS', 'Git', 'TailwindCSS', 'JavaScript', 'MongoDB'],
-  // },
+   {
+    company: 'VEET',
+    role: 'Software Engineer Intern',
+    duration: '2025 - Present',
+    description: [
+      'Led the development of a high-performance web application for a healthcare company for keeping track of their patients and their medical records.',
+    ],
+    technologies: ['Vue.js', 'Node.JS', 'Git', 'TailwindCSS', 'JavaScript', 'MongoDB'],
+   },
   {
     company: 'VALLEYNEST GLOBAL RESOURCES LIMITED UK',
     role: 'Full Stack Developer',

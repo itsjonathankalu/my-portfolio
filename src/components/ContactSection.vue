@@ -138,12 +138,12 @@ const socialLinks = [
   },
   {
     name: 'X (Twitter)',
-    url: 'https://twitter.com/itsdevnate',
+    url: 'https://x.com/itsn8k',
     icon: XIcon,
   },
   {
     name: 'Github',
-    url: 'https://github.com/itsdevnate',
+    url: 'https://github.com/itsn8k',
     icon: GithubIcon,
   },
 ]
