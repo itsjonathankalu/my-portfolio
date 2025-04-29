@@ -5,10 +5,9 @@ import { onMounted } from 'vue'
 
 import TheHeader from '@/components/TheHeader.vue'
 import IntroSection from '@/components/IntroSection.vue'
-import TheHero from '@/components/TheHero.vue'
-import ExperienceSection from '@/components/ExperienceSection.vue'
 import ProjectsSection from '@/components/ProjectsSection.vue'
-import ToolsSection from '@/components/ToolsSection.vue'
+import ExperienceSection from '@/components/ExperienceSection.vue'
+import AboutSection from '@/components/AboutSection.vue'
 import ContactSection from '@/components/ContactSection.vue'
 import TheFooter from '@/components/TheFooter.vue'
 
@@ -27,20 +26,14 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="min-h-screen theme-transition relative">
-    <!-- Grid background pattern - different for light/dark modes -->
-    <div
-      class="absolute inset-0 bg-[linear-gradient(to_right,#00000010_1px,transparent_1px),linear-gradient(to_bottom,#00000010_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#ffffff10_1px,transparent_1px),linear-gradient(to_bottom,#ffffff10_1px,transparent_1px)] bg-[size:24px_24px]"
-    ></div>
-    
+  <div class="min-h-screen theme-transition bg-white dark:bg-black">
     <!-- Main content wrapper -->
     <div class="relative">
       <TheHeader />
-      <main class="max-w-[1200px] mx-auto">
+      <main>
         <IntroSection />
-        <TheHero />
+        <AboutSection />
         <ProjectsSection />
-        <ToolsSection />
         <ExperienceSection />
         <ContactSection />
       </main>

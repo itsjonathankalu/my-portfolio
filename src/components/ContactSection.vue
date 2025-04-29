@@ -1,59 +1,110 @@
 <template>
-  <section class="py-24 px-4 sm:px-6 relative" id="contact">
-    <!-- Background Elements -->
-    <div class="absolute inset-0 overflow-hidden">
-      <div
-        class="absolute w-[800px] h-[800px] bg-accent-light/[0.01] rounded-full blur-3xl left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2"
-      ></div>
-    </div>
+  <section class="py-24 px-6 md:px-12 lg:px-24 bg-white dark:bg-black" id="contact">
+    <div class="max-w-7xl mx-auto">
+      <!-- Section Title -->
+      <div class="mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6 text-black dark:text-white">Contact</h2>
+        <p class="text-black/70 dark:text-white/70 max-w-2xl">
+          Let's connect and discuss your next project. I'm always open to new opportunities and collaborations.
+        </p>
+      </div>
 
-    <div class="max-w-[1200px] mx-auto">
-      <h2
-        class="relative text-4xl sm:text-5xl font-thin mb-16 text-center"
-        v-motion
-        :initial="{ opacity: 0, y: 100 }"
-        :enter="{ opacity: 1, y: 0 }"
-      >
-        <span class="text-accent-muted/50 block text-sm font-light tracking-[0.3em] mb-4"
-          >CONTACT</span
+      <!-- Contact Form and Info Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+        <!-- Contact Form -->
+        <div 
+          class="order-2 lg:order-1"
+          v-motion
+          :initial="{ opacity: 0, x: -50 }"
+          :enter="{ opacity: 1, x: 0, transition: { duration: 800 } }"
         >
-        <span class="text-accent-light relative">
-          Let's Connect
-          <span
-            class="absolute -bottom-4 left-1/2 w-12 h-px bg-accent-light/20 -translate-x-1/2"
-          ></span>
-        </span>
-      </h2>
-
-      <p
-        class="max-w-2xl mx-auto text-center text-accent-muted mb-16 leading-relaxed"
-        v-motion
-        :initial="{ opacity: 0, y: 50 }"
-        :enter="{ opacity: 1, y: 0, delay: 200 }"
-      >
-        I'm always interested in hearing about new opportunities and connecting with fellow
-        developers. Whether you want to discuss a project or just say hello, feel free to reach out!
-      </p>
-
-      <div
-        class="flex justify-center items-center gap-6 flex-wrap"
-        v-motion
-        :initial="{ opacity: 0, y: 100 }"
-        :enter="{ opacity: 1, y: 0, delay: 400 }"
-      >
-        <a
-          v-for="link in socialLinks"
-          :key="link.name"
-          :href="link.url"
-          target="_blank"
-          class="group flex items-center gap-3 px-5 py-3 rounded-lg bg-card/50 backdrop-blur-sm border border-accent-dark/10 hover:border-accent-light/10 text-accent-muted hover:text-accent-light transition-all duration-500 hover:translate-y-[-2px]"
+          <form class="space-y-6">
+            <div>
+              <label for="name" class="block text-sm font-medium text-black/70 dark:text-white/70 mb-2">Your Name</label>
+              <input 
+                type="text" 
+                id="name" 
+                class="w-full px-4 py-3 bg-transparent border border-black/20 dark:border-white/20 focus:border-black dark:focus:border-white focus:outline-none text-black dark:text-white transition-colors duration-300"
+                placeholder="John Doe"
+              />
+            </div>
+            
+            <div>
+              <label for="email" class="block text-sm font-medium text-black/70 dark:text-white/70 mb-2">Email Address</label>
+              <input 
+                type="email" 
+                id="email" 
+                class="w-full px-4 py-3 bg-transparent border border-black/20 dark:border-white/20 focus:border-black dark:focus:border-white focus:outline-none text-black dark:text-white transition-colors duration-300"
+                placeholder="john@example.com"
+              />
+            </div>
+            
+            <div>
+              <label for="message" class="block text-sm font-medium text-black/70 dark:text-white/70 mb-2">Your Message</label>
+              <textarea 
+                id="message" 
+                rows="5" 
+                class="w-full px-4 py-3 bg-transparent border border-black/20 dark:border-white/20 focus:border-black dark:focus:border-white focus:outline-none text-black dark:text-white transition-colors duration-300"
+                placeholder="Hello, I'd like to talk about..."
+              ></textarea>
+            </div>
+            
+            <button 
+              type="submit" 
+              class="px-8 py-4 bg-black dark:bg-white text-white dark:text-black font-medium hover:bg-black/90 dark:hover:bg-white/90 transition-all duration-300 flex items-center gap-2"
+            >
+              Send Message
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+            </button>
+          </form>
+        </div>
+        
+        <!-- Contact Info -->
+        <div 
+          class="order-1 lg:order-2"
+          v-motion
+          :initial="{ opacity: 0, x: 50 }"
+          :enter="{ opacity: 1, x: 0, transition: { duration: 800 } }"
         >
-          <component
-            :is="link.icon"
-            class="w-5 h-5 opacity-60 group-hover:opacity-100 transition-all duration-500"
-          />
-          {{ link.name }}
-        </a>
+          <div class="mb-10">
+            <h3 class="text-xl font-bold mb-4 text-black dark:text-white">Get in Touch</h3>
+            <p class="text-black/70 dark:text-white/70 mb-6">
+              I'm currently available for freelance work and full-time positions. If you have a project that needs some creative direction, I'd love to hear about it.
+            </p>
+            
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 flex items-center justify-center bg-black/5 dark:bg-white/5 text-black dark:text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <a href="mailto:jonathankalu313@gmail.com" class="text-black/70 dark:text-white/70 hover:text-black dark:hover:text-white transition-colors duration-300">
+                jonathankalu313@gmail.com
+              </a>
+            </div>
+          </div>
+          
+          <!-- Social Links -->
+          <div>
+            <h3 class="text-xl font-bold mb-4 text-black dark:text-white">Connect With Me</h3>
+            <div class="flex flex-col space-y-4">
+              <a 
+                v-for="link in socialLinks" 
+                :key="link.name" 
+                :href="link.url" 
+                target="_blank" 
+                class="flex items-center gap-3 text-black/70 dark:text-white/70 hover:text-black dark:hover:text-white transition-colors duration-300"
+              >
+                <div class="w-10 h-10 flex items-center justify-center bg-black/5 dark:bg-white/5">
+                  <component :is="link.icon" class="w-5 h-5" />
+                </div>
+                <span>{{ link.name }}</span>
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>

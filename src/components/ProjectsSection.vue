@@ -1,214 +1,221 @@
 <template>
-  <section class="py-24 px-4 sm:px-6 relative theme-transition" id="projects">
-    <!-- Background Elements -->
-    <div class="absolute inset-0 overflow-hidden">
-      <div
-        class="absolute w-[800px] h-[800px] bg-accent-light/[0.01] dark:bg-accent-light-dark/[0.01] rounded-full blur-3xl left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2"
-      ></div>
-    </div>
+  <section class="py-24 px-6 md:px-12 lg:px-24 bg-white dark:bg-black" id="projects">
+    <div class="max-w-7xl mx-auto">
+      <!-- Section Title -->
+      <div class="mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6 text-black dark:text-white">Projects</h2>
+        <p class="text-black/70 dark:text-white/70 max-w-2xl">
+          A selection of my recent work. Swipe through to see detailed case studies of my projects.
+        </p>
+      </div>
 
-    <h2
-      class="relative text-4xl sm:text-5xl font-bold mb-16 text-center text-accent-light dark:text-accent-light-dark"
-      v-motion
-      :initial="{ opacity: 0, y: 50 }"
-      :enter="{ opacity: 1, y: 0, transition: { duration: 800 } }"
-    >
-      <span class="text-accent-muted dark:text-accent-muted-dark block text-sm font-medium tracking-[0.3em] mb-4"
-        >MY WORK</span
-      >
-      <span class="relative inline-block">
-        Here's What I've Been Up To
-        <span
-          class="absolute -bottom-4 left-1/2 w-12 h-px bg-accent-light/20 dark:bg-accent-light-dark/20 -translate-x-1/2"
-        ></span>
-      </span>
-    </h2>
-
-    <p
-      class="max-w-2xl mx-auto text-accent-muted dark:text-accent-muted-dark mt-8 mb-16 text-base leading-relaxed"
-      v-motion
-      :initial="{ opacity: 0, y: 20 }"
-      :enter="{ opacity: 1, y: 0, transition: { duration: 600, delay: 200 } }"
-    >
-      A showcase of my recent work, featuring full-stack applications and innovative solutions. Each
-      project represents a unique challenge and demonstrates my commitment to clean code and user
-      experience.
-    </p>
-
-    <!-- Project Grid Layout -->
-    <div 
-      class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto"
-      v-motion
-      :initial="{ opacity: 0, y: 30 }"
-      :enter="{ opacity: 1, y: 0, transition: { duration: 800, delay: 400 } }"
-    >
-      <div
-        v-for="(project, index) in projects.slice(0, 4)"
-        :key="project.name"
-        class="group relative overflow-hidden rounded-xl bg-card/50 dark:bg-card-dark/50 backdrop-blur-sm border border-accent-dark/10 dark:border-accent-dark-dark/10 hover:border-accent-light/10 dark:hover:border-accent-light-dark/10 transition-all duration-500 hover:shadow-lg"
-        v-motion
-        :initial="{ opacity: 0, y: 30 }"
-        :enter="{ opacity: 1, y: 0, transition: { duration: 600, delay: 200 + (index * 100) } }"
-      >
-        <!-- Project Image -->
-        <div class="aspect-video overflow-hidden">
-          <img
-            :src="project.image"
-            :alt="project.name"
-            class="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
-          />
+      <!-- Projects Slider -->
+      <div class="relative">
+        <!-- Navigation Buttons -->
+        <div class="hidden md:flex justify-between absolute top-1/2 -translate-y-1/2 w-full z-10 px-4">
+          <button 
+            @click="prevSlide" 
+            class="w-12 h-12 flex items-center justify-center bg-white dark:bg-black border border-black/20 dark:border-white/20 text-black dark:text-white hover:bg-black/5 dark:hover:bg-white/5 transition-colors duration-300"
+            :disabled="currentSlide === 0"
+            :class="{'opacity-50 cursor-not-allowed': currentSlide === 0}"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <button 
+            @click="nextSlide" 
+            class="w-12 h-12 flex items-center justify-center bg-white dark:bg-black border border-black/20 dark:border-white/20 text-black dark:text-white hover:bg-black/5 dark:hover:bg-white/5 transition-colors duration-300"
+            :disabled="currentSlide === projects.length - 1"
+            :class="{'opacity-50 cursor-not-allowed': currentSlide === projects.length - 1}"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
         </div>
-        
-        <!-- Project Info -->
-        <div class="p-6">
-          <h3 class="text-xl font-medium text-accent-light dark:text-accent-light-dark mb-2">
-            {{ project.name }}
-          </h3>
-          <p class="text-sm text-accent-muted dark:text-accent-muted-dark mb-4 line-clamp-2">
-            {{ project.description }}
-          </p>
-          
-          <!-- Technologies -->
-          <div class="flex flex-wrap gap-2 mb-4">
-            <span
-              v-for="tech in project.technologies.slice(0, 3)"
-              :key="tech"
-              class="text-xs font-medium text-accent-muted dark:text-accent-muted-dark px-3 py-1 rounded-full bg-accent-dark/5 dark:bg-accent-dark-dark/5 border border-accent-dark/10 dark:border-accent-dark-dark/10"
+
+        <!-- Slider Container -->
+        <div class="overflow-hidden">
+          <div 
+            class="flex transition-transform duration-500 ease-out"
+            :style="{ transform: `translateX(-${currentSlide * 100}%)` }"
+          >
+            <!-- Project Slides -->
+            <div 
+              v-for="(project, index) in projects" 
+              :key="index"
+              class="w-full flex-shrink-0 snap-center"
             >
-              {{ tech }}
-            </span>
-            <span 
-              v-if="project.technologies.length > 3"
-              class="text-xs font-medium text-accent-muted dark:text-accent-muted-dark px-3 py-1 rounded-full"
-            >
-              +{{ project.technologies.length - 3 }} more
-            </span>
-          </div>
-          
-          <!-- Project Links -->
-          <div class="flex justify-between items-center">
-            <a 
-              :href="`#project-${index}`" 
-              class="text-sm font-medium text-accent-light dark:text-accent-light-dark hover:underline flex items-center gap-1"
-            >
-              View Project
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-              </svg>
-            </a>
-            
-            <div class="flex gap-2">
-              <a
-                v-if="project.github"
-                :href="project.github"
-                target="_blank"
-                class="p-2 rounded-full text-accent-muted dark:text-accent-muted-dark hover:text-accent-light dark:hover:text-accent-light-dark hover:bg-accent-light/5 dark:hover:bg-accent-light-dark/5 transition-all duration-300"
-                aria-label="GitHub Repository"
-              >
-                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-                </svg>
-              </a>
-              <a
-                v-if="project.demo"
-                :href="project.demo"
-                target="_blank"
-                class="p-2 rounded-full text-accent-muted dark:text-accent-muted-dark hover:text-accent-light dark:hover:text-accent-light-dark hover:bg-accent-light/5 dark:hover:bg-accent-light-dark/5 transition-all duration-300"
-                aria-label="Live Demo"
-              >
-                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg>
-              </a>
-              <span
-                v-for="tech in project.technologies"
-                :key="tech"
-                class="text-xs font-light text-accent-muted px-4 py-2 rounded-full bg-card/50 backdrop-blur-sm border border-accent-dark/10 hover:border-accent-light/10 hover:text-accent-light hover:translate-y-[-2px] transition-all duration-300"
-              >
-                {{ tech }}
-              </span>
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Project Image -->
+                <div class="relative">
+                  <img 
+                    :src="project.image" 
+                    :alt="project.title" 
+                    class="w-full h-auto aspect-video object-cover grayscale"
+                  />
+                  <div class="absolute inset-0 border-8 border-black/10 dark:border-white/10 -m-3"></div>
+                </div>
+                
+                <!-- Project Details -->
+                <div>
+                  <h3 class="text-2xl font-bold mb-4 text-black dark:text-white">{{ project.title }}</h3>
+                  <p class="text-black/70 dark:text-white/70 mb-6">{{ project.description }}</p>
+                  
+                  <!-- Tech Stack -->
+                  <div class="mb-8">
+                    <h4 class="text-sm uppercase tracking-wider text-black/50 dark:text-white/50 mb-3">Technologies</h4>
+                    <div class="flex flex-wrap gap-3">
+                      <span 
+                        v-for="(tech, techIndex) in project.technologies" 
+                        :key="techIndex"
+                        class="px-4 py-2 bg-black/5 dark:bg-white/5 text-black/70 dark:text-white/70 text-sm"
+                      >
+                        {{ tech }}
+                      </span>
+                    </div>
+                  </div>
+                  
+                  <!-- Project Links -->
+                  <div class="flex gap-6">
+                    <a 
+                      v-if="project.codeLink"
+                      :href="project.codeLink" 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="px-6 py-3 bg-black dark:bg-white text-white dark:text-black font-medium flex items-center gap-2 hover:bg-black/90 dark:hover:bg-white/90 transition-all duration-300"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                      </svg>
+                      View Code
+                    </a>
+                    <a 
+                      v-if="project.demoLink"
+                      :href="project.demoLink" 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="px-6 py-3 border border-black dark:border-white text-black dark:text-white font-medium flex items-center gap-2 hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-300"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                      </svg>
+                      Live Demo
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
+        
+        <!-- Pagination Dots -->
+        <div class="flex justify-center mt-8 gap-2">
+          <button 
+            v-for="(_, index) in projects" 
+            :key="index"
+            @click="goToSlide(index)"
+            class="w-3 h-3 rounded-full transition-all duration-300"
+            :class="currentSlide === index ? 'bg-black dark:bg-white scale-125' : 'bg-black/20 dark:bg-white/20 hover:bg-black/40 dark:hover:bg-white/40'"
+          ></button>
+        </div>
+      </div>
+      
+      <!-- Mobile Navigation -->
+      <div class="flex justify-center gap-4 mt-8 md:hidden">
+        <button 
+          @click="prevSlide" 
+          class="px-4 py-2 border border-black/20 dark:border-white/20 text-black dark:text-white flex items-center gap-2 hover:bg-black/5 dark:hover:bg-white/5 transition-colors duration-300"
+          :disabled="currentSlide === 0"
+          :class="{'opacity-50 cursor-not-allowed': currentSlide === 0}"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7" />
+          </svg>
+          Previous
+        </button>
+        <button 
+          @click="nextSlide" 
+          class="px-4 py-2 border border-black/20 dark:border-white/20 text-black dark:text-white flex items-center gap-2 hover:bg-black/5 dark:hover:bg-white/5 transition-colors duration-300"
+          :disabled="currentSlide === projects.length - 1"
+          :class="{'opacity-50 cursor-not-allowed': currentSlide === projects.length - 1}"
+        >
+          Next
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
       </div>
     </div>
   </section>
 </template>
 
 <script setup>
-const projects = [
-  {
-    name: 'Medium',
-    description:
-      'A comprehensive full-stack blogging platform inspired by Medium. Features include rich text editing, user authentication, article publishing with categories and tags, commenting system, and responsive design. Built with performance and scalability in mind using modern web technologies.',
-    technologies: ['Express.js', 'Node.js', 'MongoDB', 'TailwindCSS', 'EJS'],
-    github: 'https://github.com/itsn8k/Medium-Clone',
-    demo: 'https://mediumclone.up.railway.app',
-    image: '/images/img1.png',
-  },
-  {
-    name: 'Personal Portfolio',
-    description:
-      'A modern, minimalist portfolio website showcasing my work and experience. Features smooth animations, responsive design, and optimized performance. Built with Vue.js and TailwindCSS, incorporating modern design principles and best practices for an engaging user experience.',
-    technologies: ['Vue.js', 'TailwindCss', 'Vite', 'Node.js'],
-    github: 'https://github.com/itsn8k/my-portfolio',
-    demo: 'https://jkdevio-portfolio.vercel.app',
-    image: '/images/img2.png',
-  },
+import { ref } from 'vue';
 
+// State for the slider
+const currentSlide = ref(0);
+
+// Project data - using existing projects but adapting to new format
+const projects = ref([
   {
-    name: 'Cartzilla',
-    description:
-      'An elegant and responsive e-commerce platform built using the Cartzilla template and powered by Bootstrap 5, Designed for fashion stores.',
-    technologies: ['Bootstrap', 'Bootstrap.js', 'Istope.js', 'Jquery', 'Css'],
-    github: 'https://github.com/itsn8k/Cartzilla-Bootstrap-5-Website',
-    demo: 'https://cartzilla-five.vercel.app',
+    title: 'Medium',
+    description: 'A comprehensive full-stack blogging platform inspired by Medium. Features include rich text editing, user authentication, article publishing with categories and tags, commenting system, and responsive design.',
+    image: '/images/img1.png',
+    technologies: ['Express.js', 'Node.js', 'MongoDB', 'TailwindCSS', 'EJS'],
+    codeLink: 'https://github.com/itsn8k/Medium-Clone',
+    demoLink: 'https://mediumclone.up.railway.app'
+  },
+  {
+    title: 'Personal Portfolio',
+    description: 'A modern, minimalist portfolio website showcasing my work and experience. Features smooth animations, responsive design, and optimized performance. Built with Vue.js and TailwindCSS.',
+    image: '/images/img2.png',
+    technologies: ['Vue.js', 'TailwindCss', 'Vite', 'Node.js'],
+    codeLink: 'https://github.com/itsn8k/my-portfolio',
+    demoLink: 'https://jkdevio-portfolio.vercel.app'
+  },
+  {
+    title: 'Cartzilla',
+    description: 'An elegant and responsive e-commerce platform built using the Cartzilla template and powered by Bootstrap 5, Designed for fashion stores.',
     image: '/images/img3.png',
+    technologies: ['Bootstrap', 'Bootstrap.js', 'Istope.js', 'Jquery', 'Css'],
+    codeLink: 'https://github.com/itsn8k/Cartzilla-Bootstrap-5-Website',
+    demoLink: 'https://cartzilla-five.vercel.app'
   },
   {
-    name: 'FitGuide Pro',
-    description:
-      'A modern Bootstrap 5 website designed for gym and fitness enthusiasts. FitGuide Pro offers a sleek and responsive layout, highlighting fitness programs, services, and expert guidance.',
-    technologies: ['HTML 5', 'Css 3', 'Bootstrap 5', 'Javascript', 'Jquery'],
-    github: 'https://github.com/itsn8k/FreeGuide-Bootstrap-5-Site',
-    demo: 'https://freeguidepro.vercel.app',
+    title: 'FitGuide Pro',
+    description: 'A modern Bootstrap 5 website designed for gym and fitness enthusiasts. FitGuide Pro offers a sleek and responsive layout, highlighting fitness programs, services, and expert guidance.',
     image: '/images/img4.png',
+    technologies: ['HTML 5', 'Css 3', 'Bootstrap 5', 'Javascript', 'Jquery'],
+    codeLink: 'https://github.com/itsn8k/FreeGuide-Bootstrap-5-Site',
+    demoLink: 'https://freeguidepro.vercel.app'
   },
   {
-    name: 'Sneaker',
-    description:
-      'A sleek and responsive Bootstrap 5 website designed for sneaker enthusiasts. Sneaker Nine combines modern design with an intuitive layout, perfect for showcasing sneaker collections and fashion trends.',
-    technologies: ['HTML 5', 'Css 3', 'Bootstrap 5', 'Javascript', 'Jquery', 'Lighslider.js'],
-    github: 'https://github.com/itsn8k/Sneaker-Bootstrap-5-Site',
-    demo: 'https://sneaker-nine-lyart.vercel.app',
+    title: 'Sneaker',
+    description: 'A sleek and responsive Bootstrap 5 website designed for sneaker enthusiasts. Sneaker Nine combines modern design with an intuitive layout, perfect for showcasing sneaker collections and fashion trends.',
     image: '/images/img5.png',
-  },
-  {
-    name: 'Trulia',
-    description:
-      'A sleek and responsive Bootstrap 5 website designed for Realestate. Trulia combines modern design with an intuitive layout, perfect for showcasing Realestate collections and trends.',
     technologies: ['HTML 5', 'Css 3', 'Bootstrap 5', 'Javascript', 'Jquery', 'Lighslider.js'],
-    github: 'https://github.com/itsn8k/Trulia-Site',
-    demo: 'https://trulia-site-pi.vercel.app',
-    image: '/images/img6.png',
-  },
-  {
-    name: 'VTEKS',
-    description:
-      'A modern, responsive website template for web agencies and freelancers to showcase services, portfolios, and contact information.',
-    technologies: ['HTML 5', 'Css 3', 'Bootstrap 5', 'Javascript', 'Jquery', 'Lighslider.js'],
-    github: 'https://github.com/itsn8k/Official-Vteks_Bootstrap-5-Site',
-    demo: 'https://official-vteks.vercel.app',
-    image: '/images/img7.png',
-  },
-  {
-    name: 'Flux',
-    description:
-      'A sleek and responsive Bootstrap 5 website designed for Realestate. Trulia combines modern design with an intuitive layout, perfect for showcasing Realestate collections and trends.',
-    technologies: ['HTML 5', 'Css 3', 'Bootstrap 5', 'Javascript', 'Jquery', 'Lighslider.js'],
-    github: 'https://github.com/itsn8k/Flux-Website-Template',
-    demo: 'https://flux-ashen.vercel.app',
-    image: '/images/img8.png',
-  },
-]
+    codeLink: 'https://github.com/itsn8k/Sneaker-Bootstrap-5-Site',
+    demoLink: 'https://sneaker-nine-lyart.vercel.app'
+  }
+]);
+
+// Slider navigation functions
+const nextSlide = () => {
+  if (currentSlide.value < projects.value.length - 1) {
+    currentSlide.value++;
+  }
+};
+
+const prevSlide = () => {
+  if (currentSlide.value > 0) {
+    currentSlide.value--;
+  }
+};
+
+const goToSlide = (index) => {
+  currentSlide.value = index;
+};
 </script>
