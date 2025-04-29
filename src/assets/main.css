@@ -2,35 +2,60 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  body {
+    @apply bg-background text-accent-light transition-colors duration-300;
+  }
+
+  .dark body {
+    @apply bg-background-dark text-accent-light-dark;
+  }
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 ::selection {
-  background: rgba(139, 92, 246, 0.3); /* Purple with opacity */
-  color: #fff;
+  @apply bg-accent-light/20 text-accent-light;
 }
 
 /* For Firefox */
 ::-moz-selection {
-  background: rgba(139, 92, 246, 0.3);
-  color: #fff;
+  @apply bg-accent-light/20 text-accent-light;
 }
 
-/* Optional: Add a custom scrollbar */
+/* Light mode scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #121212;
+  @apply bg-card;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #2a2a2a;
-  border-radius: 5px;
+  @apply bg-accent-dark rounded-full;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #363636;
+  @apply bg-accent-muted;
+}
+
+/* Dark mode scrollbar */
+.dark ::-webkit-scrollbar-track {
+  @apply bg-card-dark;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  @apply bg-accent-dark-dark rounded-full;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  @apply bg-accent-muted-dark;
+}
+
+/* Transitions for theme switching */
+.theme-transition {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }

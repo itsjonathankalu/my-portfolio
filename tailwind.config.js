@@ -5,13 +5,40 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: '#0A0A0A',
-        card: '#141414',
-        'card-hover': '#1A1A1A',
+        // Light mode colors
+        background: {
+          DEFAULT: '#FFFFFF',
+          dark: '#0A0A0A',
+        },
+        card: {
+          DEFAULT: '#F5F5F5',
+          hover: '#EEEEEE',
+          dark: '#141414',
+          'hover-dark': '#1A1A1A',
+        },
         accent: {
-          light: '#FFFFFF',
-          muted: '#A3A3A3',
-          dark: '#404040',
+          light: '#000000',
+          muted: '#666666',
+          dark: '#CCCCCC',
+          // Dark mode colors
+          'light-dark': '#FFFFFF',
+          'muted-dark': '#A3A3A3',
+          'dark-dark': '#404040',
+        },
+      },
+      animation: {
+        'spin-slow': 'spin 8s linear infinite',
+        float: 'float 15s ease-in-out infinite',
+        'float-delayed': 'float-delayed 15s ease-in-out infinite',
+      },
+      keyframes: {
+        float: {
+          '0%, 100%': { transform: 'translate(0, 0)' },
+          '50%': { transform: 'translate(-30px, 30px)' },
+        },
+        'float-delayed': {
+          '0%, 100%': { transform: 'translate(0, 0)' },
+          '50%': { transform: 'translate(30px, -30px)' },
         },
       },
     },

@@ -1,127 +1,125 @@
 <template>
-  <section class="py-24 px-4 sm:px-6 relative" id="projects">
+  <section class="py-24 px-4 sm:px-6 relative theme-transition" id="projects">
     <!-- Background Elements -->
     <div class="absolute inset-0 overflow-hidden">
       <div
-        class="absolute w-[800px] h-[800px] bg-accent-light/[0.01] rounded-full blur-3xl left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2"
+        class="absolute w-[800px] h-[800px] bg-accent-light/[0.01] dark:bg-accent-light-dark/[0.01] rounded-full blur-3xl left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2"
       ></div>
     </div>
 
     <h2
-      class="relative text-4xl sm:text-5xl font-thin mb-16 text-center"
+      class="relative text-4xl sm:text-5xl font-bold mb-16 text-center text-accent-light dark:text-accent-light-dark"
       v-motion
-      :initial="{ opacity: 0, y: 100 }"
-      :enter="{ opacity: 1, y: 0 }"
+      :initial="{ opacity: 0, y: 50 }"
+      :enter="{ opacity: 1, y: 0, transition: { duration: 800 } }"
     >
-      <span class="text-accent-muted/50 block text-sm font-light tracking-[0.3em] mb-4"
-        >SHOWCASE</span
+      <span class="text-accent-muted dark:text-accent-muted-dark block text-sm font-medium tracking-[0.3em] mb-4"
+        >MY WORK</span
       >
-      <span class="text-accent-light relative">
-        Featured Projects
+      <span class="relative inline-block">
+        Here's What I've Been Up To
         <span
-          class="absolute -bottom-4 left-1/2 w-12 h-px bg-accent-light/20 -translate-x-1/2"
+          class="absolute -bottom-4 left-1/2 w-12 h-px bg-accent-light/20 dark:bg-accent-light-dark/20 -translate-x-1/2"
         ></span>
       </span>
     </h2>
 
     <p
-      class="max-w-2xl mx-auto text-accent-muted/80 mt-8 mb-16 text-sm leading-relaxed"
+      class="max-w-2xl mx-auto text-accent-muted dark:text-accent-muted-dark mt-8 mb-16 text-base leading-relaxed"
       v-motion
       :initial="{ opacity: 0, y: 20 }"
-      :enter="{ opacity: 1, y: 0, delay: 200 }"
+      :enter="{ opacity: 1, y: 0, transition: { duration: 600, delay: 200 } }"
     >
       A showcase of my recent work, featuring full-stack applications and innovative solutions. Each
       project represents a unique challenge and demonstrates my commitment to clean code and user
       experience.
     </p>
 
-    <div class="relative max-w-6xl mx-auto">
-      <!-- Vertical Timeline Line -->
-      <div class="absolute left-1/2 top-0 bottom-0 w-px bg-accent-dark/20 hidden md:block"></div>
-
+    <!-- Project Grid Layout -->
+    <div 
+      class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto"
+      v-motion
+      :initial="{ opacity: 0, y: 30 }"
+      :enter="{ opacity: 1, y: 0, transition: { duration: 800, delay: 400 } }"
+    >
       <div
-        v-for="(project, index) in projects"
+        v-for="(project, index) in projects.slice(0, 4)"
         :key="project.name"
-        class="group relative mb-32 last:mb-0 md:flex items-center gap-16"
-        :class="index % 2 === 0 ? '' : 'flex-row-reverse'"
+        class="group relative overflow-hidden rounded-xl bg-card/50 dark:bg-card-dark/50 backdrop-blur-sm border border-accent-dark/10 dark:border-accent-dark-dark/10 hover:border-accent-light/10 dark:hover:border-accent-light-dark/10 transition-all duration-500 hover:shadow-lg"
         v-motion
-        :initial="{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }"
-        :enter="{ opacity: 1, x: 0, delay: index * 200 }"
+        :initial="{ opacity: 0, y: 30 }"
+        :enter="{ opacity: 1, y: 0, transition: { duration: 600, delay: 200 + (index * 100) } }"
       >
-        <!-- Timeline Dot -->
-        <div
-          class="absolute left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-accent-light/20 group-hover:bg-accent-light/40 group-hover:scale-150 transition-all duration-500 hidden md:block"
-        ></div>
-
-        <!-- Project Content -->
-        <div class="w-full md:w-1/2 space-y-6">
-          <!-- Image Container -->
-          <div class="relative aspect-video rounded-xl overflow-hidden group/image">
-            <img
-              :src="project.image"
-              :alt="project.name"
-              class="w-full h-full object-cover transition-all duration-700 group-hover/image:scale-105 grayscale group-hover:grayscale-0"
-            />
-            <div
-              class="absolute inset-0 bg-gradient-to-r from-background/95 to-background/80 opacity-0 group-hover/image:opacity-100 transition-all duration-700"
-            ></div>
-            <!-- Project Links -->
-            <div
-              class="absolute bottom-4 right-4 flex gap-3 opacity-0 translate-y-4 group-hover/image:opacity-100 group-hover/image:translate-y-0 transition-all duration-700 z-10"
+        <!-- Project Image -->
+        <div class="aspect-video overflow-hidden">
+          <img
+            :src="project.image"
+            :alt="project.name"
+            class="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
+          />
+        </div>
+        
+        <!-- Project Info -->
+        <div class="p-6">
+          <h3 class="text-xl font-medium text-accent-light dark:text-accent-light-dark mb-2">
+            {{ project.name }}
+          </h3>
+          <p class="text-sm text-accent-muted dark:text-accent-muted-dark mb-4 line-clamp-2">
+            {{ project.description }}
+          </p>
+          
+          <!-- Technologies -->
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span
+              v-for="tech in project.technologies.slice(0, 3)"
+              :key="tech"
+              class="text-xs font-medium text-accent-muted dark:text-accent-muted-dark px-3 py-1 rounded-full bg-accent-dark/5 dark:bg-accent-dark-dark/5 border border-accent-dark/10 dark:border-accent-dark-dark/10"
             >
+              {{ tech }}
+            </span>
+            <span 
+              v-if="project.technologies.length > 3"
+              class="text-xs font-medium text-accent-muted dark:text-accent-muted-dark px-3 py-1 rounded-full"
+            >
+              +{{ project.technologies.length - 3 }} more
+            </span>
+          </div>
+          
+          <!-- Project Links -->
+          <div class="flex justify-between items-center">
+            <a 
+              :href="`#project-${index}`" 
+              class="text-sm font-medium text-accent-light dark:text-accent-light-dark hover:underline flex items-center gap-1"
+            >
+              View Project
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+            </a>
+            
+            <div class="flex gap-2">
               <a
                 v-if="project.github"
                 :href="project.github"
                 target="_blank"
-                class="p-3 rounded-lg bg-card/50 backdrop-blur-sm text-accent-muted hover:text-accent-light hover:scale-110 transition-all duration-300"
+                class="p-2 rounded-full text-accent-muted dark:text-accent-muted-dark hover:text-accent-light dark:hover:text-accent-light-dark hover:bg-accent-light/5 dark:hover:bg-accent-light-dark/5 transition-all duration-300"
+                aria-label="GitHub Repository"
               >
-                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                  <path
-                    d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"
-                  />
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
                 </svg>
               </a>
               <a
                 v-if="project.demo"
                 :href="project.demo"
                 target="_blank"
-                class="p-3 rounded-lg bg-card/50 backdrop-blur-sm text-accent-muted hover:text-accent-light hover:scale-110 transition-all duration-300"
+                class="p-2 rounded-full text-accent-muted dark:text-accent-muted-dark hover:text-accent-light dark:hover:text-accent-light-dark hover:bg-accent-light/5 dark:hover:bg-accent-light-dark/5 transition-all duration-300"
+                aria-label="Live Demo"
               >
-                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                  />
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>
               </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project Info -->
-        <div
-          class="w-full md:w-1/2 p-10 bg-card/50 backdrop-blur-sm rounded-xl border border-accent-dark/10 hover:border-accent-light/10 transition-all duration-500 group-hover:translate-y-[-2px]"
-        >
-          <div class="space-y-8">
-            <!-- Project Header -->
-            <div class="flex flex-wrap items-center gap-3">
-              <span class="text-xs font-light text-accent-light/60 tracking-widest">
-                Featured Project {{ String(index + 1).padStart(2, '0') }}
-              </span>
-              <h3 class="text-2xl font-light text-accent-light tracking-wide w-full mt-4">
-                {{ project.name }}
-              </h3>
-            </div>
-
-            <!-- Project Description -->
-            <p class="text-accent-muted leading-relaxed">
-              {{ project.description }}
-            </p>
-
-            <!-- Technologies -->
-            <div class="flex flex-wrap gap-2 pt-6">
               <span
                 v-for="tech in project.technologies"
                 :key="tech"
