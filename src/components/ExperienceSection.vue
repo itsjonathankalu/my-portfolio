@@ -114,18 +114,18 @@
 <script setup>
 const experiences = [
    {
-    company: 'VEET',
+    company: 'Joinveet',
     role: 'Software Engineer Intern',
-    duration: '2025 - Present',
+    duration: 'April 2025 - Present',
     description: [
-      'Led the development of a high-performance web application for a healthcare company for keeping track of their patients and their medical records.',
+      'Playing a key role in developing a responsive and high-performing web application at Joinveet, focusing on delivering clean and maintainable frontend code. Contributed to building user-friendly interfaces, integrating APIs for dynamic data, fixing performance bottlenecks, and enhancing overall UX. Collaborated closely with the team in feature planning, technical discussions, and documentation of development processes.',
     ],
     technologies: ['Vue.js', 'Node.JS', 'Git', 'TailwindCSS', 'JavaScript', 'MongoDB'],
    },
   {
     company: 'VALLEYNEST GLOBAL RESOURCES LIMITED UK',
     role: 'Full Stack Developer',
-    duration: '2024 - Present',
+    duration: 'January 2024 - Present',
     description: [
       'Led the development of a high-performance web application for an E-commerce company for keeping track of their products and their sales.',
     ],
@@ -134,32 +134,32 @@ const experiences = [
   {
     company: 'Slessor Healthcare UK',
     role: 'Full Stack Developer',
-    duration: '2023 - Present',
+    duration: 'October 2023 - Present',
     description: [
       'Led the development of a high-performance web application for a healthcare company for keeping track of their mails, records, payroll, and more.',
     ],
     technologies: ['Node.js', 'EJS', 'Express.Js', 'TailwindCSS', 'JavaScript', 'MongoDB'],
   },
-  {
-    company: 'Upwork',
-    role: 'FreeLance Full Stack Developer',
-    duration: '2022 - Present',
-    description: [
-      'FreeLance Full Stack Developer, working on various projects for different clients.',
-    ],
-    technologies: [
-      'React',
-      'Vue.js',
-      'JavaScript',
-      'CSS3',
-      'Git',
-      'TailwindCSS',
-      'Node.JS',
-      'Aws',
-      'MongoDB',
-      'MySQL',
-      'JWT',
-    ],
-  },
+  // {
+  //   company: 'Valleynest Global Resources Limited UK',
+  //   role: 'Full Stack Developer',
+  //   duration: '2024 - Present',
+  //   description: [
+  //     'Led the development of a high-performance web application for an E-commerce company for keeping track of their products and their sales.',
+  //   ],
+  //   technologies: [
+  //     'React',
+  //     'Vue.js',
+  //     'JavaScript',
+  //     'CSS3',
+  //     'Git',
+  //     'TailwindCSS',
+  //     'Node.JS',
+  //     'Aws',
+  //     'MongoDB',
+  //     'MySQL',
+  //     'JWT',
+  //   ],
+  // },
 ]
 </script>
