@@ -7,6 +7,7 @@ import ProjectsSection from '@/components/ProjectsSection.vue'
 import ToolsSection from '@/components/ToolsSection.vue'
 import ContactSection from '@/components/ContactSection.vue'
 import TheFooter from '@/components/TheFooter.vue'
+import { Analytics } from '@vercel/analytics/vue';
 </script>
 
 <template>
@@ -27,4 +28,5 @@ import TheFooter from '@/components/TheFooter.vue'
       <TheFooter />
     </div>
   </div>
+  <Analytics />
 </template>
