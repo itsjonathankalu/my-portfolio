@@ -1,6 +1,6 @@
 <div align="center">
-  <h1>Jonathan Kalu • Portfolio</h1>
-  <p>A modern, minimalist portfolio showcasing my work as a Software Developer</p>
+  <h1>Portfolio</h1>
+  <p>A modern, minimalist portfolio as a Software Developer</p>
   
   [![Live Demo](https://img.shields.io/badge/demo-live-brightgreen.svg)](https://jkdevio-portfolio.vercel.app)
   [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
